@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // Fetch data from the server and save to the state
     fetch('https://api.enye.tech/v1/challenge/records')
       .then(res => res.json())
       .then(data => {
@@ -39,6 +40,7 @@ class App extends Component {
   }
 
   filterData = (userSearch) => {
+    // Logic to filter data based on search string user inputs
     const { recordsResult } = this.state
     let filteredRecords = recordsResult.filter(record => {
       return record.FirstName.toLowerCase().includes(userSearch.toLowerCase()) || record.LastName.toLowerCase().includes(userSearch.toLowerCase())
@@ -47,6 +49,7 @@ class App extends Component {
   }
 
   onSearchRecords = (event) => {
+    // displays search result data for the user and calculates the pagination
     const userSearch = event.target.value
     const { perPage } = this.state
     const filteredRecords = this.filterData(userSearch)
@@ -61,6 +64,7 @@ class App extends Component {
   }
 
   onSelectChange = (event) => {
+    // displays results based on what data the user wants the records to be sorted by
     const { filteredRecords } = this.state;
     const stringSelected = event.target.value
     if (stringSelected === 'userName') {
@@ -74,6 +78,7 @@ class App extends Component {
   }
 
   handlePageClick = (data) => {
+    // Handle moving to the next page when user clicks on pagination
     const { perPage, filteredRecords } = this.state;
     let selected = data.selected;
     this.setState({
